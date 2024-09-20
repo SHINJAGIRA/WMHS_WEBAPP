@@ -1,0 +1,218 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+
+</head>
+<body>
+    
+    <div class="flex w-full space-x-10">
+        <div class="bg-primary w-32 h-24">
+        this is the blue        
+        </div>
+
+        <div class="bg-secondary w-32 h-24">
+            this is gray 
+        </div>
+    </div>
+    
+
+</body>
+</html>
+
+{% load static %}
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WMHS</title>
+    <link rel="stylesheet" href='{% static "css/base.css" %}'>
+    <link rel="stylesheet" href='{% static "css/navbar.css" %}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% tailwind_css %}
+</head>
+<body class="font-custom">
+    <div>
+        <nav class="navbar bg-white">
+            <div class="">
+                <div class="flex items-center justify-between py-3 mx-16">
+                    <div class="text-2xl text-secondary font-custom1">WMHS</div>
+                    <div>
+                        <ul class="flex items-center mr-10 space-x-10 font-semibold capitalize">
+                            <li class="px-3 py-2 hover:bg-primary hover:text-white rounded-sm transition-all">
+                                <a href="#" class="text-sm">Home</a>
+                            </li>
+                            <li class="px-3 py-2 hover:bg-primary hover:text-white rounded-sm transition-all">
+                                <a href="#" class="text-sm">Academic</a>
+                            </li>
+                            <li class="px-3 py-2 hover:bg-primary hover:text-white rounded-sm transition-all">
+                                <a href="#" class="text-sm">About</a>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">Administration & Teachers</a>
+                                    <a href="#" class="dropdown-item">School Information</a>
+                                    <a href="#" class="dropdown-item">Faculty</a>
+                                </div>
+                            </li>
+                            <li class="px-3 py-2 hover:bg-primary hover:text-white rounded-sm transition-all">
+                                <a href="/blog" class="text-sm">Blog</a>
+                            </li>
+                            <li class="px-3 py-2 hover:bg-primary hover:text-white rounded-sm transition-all">
+                                <a href="#" class="text-sm">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div>
+        </div>
+
+
+        
+        {% block content %}
+            replace me
+        {% endblock content %}
+            
+
+
+        <div class="footer bg-primary px-24 py-5 text-white text-sm">
+            <div class="text-2xl  font-light" style="font-family: Impact;">WMHS</div>
+            <div class="flex justify-between mt-10 mb-20">
+                <div class="flex space-x-10">
+                    <ul class="space-y-1">
+                        <h3 class=" mb-4 font-bold uppercase">Our Services</h3>
+                        <li>
+                            <a href="">
+                                Apply as a student
+                            </a>
+                            </li>
+                        <li><a href="">Ask a question</a></li>
+                        <li><a href="">About us</a></li>
+                        <li><a href="">Contact us</a></li>
+                    </ul>
+                    <ul class="space-y-1">
+                        <h3 class=" mb-4 font-bold uppercase">Academics</h3>
+                        <li>
+                            <a href="">
+                                Homeworks
+                            </a>
+                            </li>
+                        <li><a href="">Timetables</a></li>
+                        <li><a href="">Tvet Plan</a></li>
+                        <li><a href="">Chapel plan</a></li>
+                        <li><a href="">Results</a></li>
+                    </ul>
+                    <ul class="space-y-1">
+                        <h3 class="font-bold mb-4  uppercase">Other links</h3>
+                        <li>
+                            <a href="">
+                                Blog
+                            </a>
+                            </li>
+                        <li><a href="">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="">
+                    <p>Subscribe to our email:</p>
+                    <div class="flex space-x-2 my-3">
+                        <input type="text" class=" rounded-sm text-secondary border-none h-10 outline-none w-60 placeholder-opacity-50 italic text-sm" placeholder="Enter your email...">
+                    <button class="bg-secondary  px-4 h-10 rounded-sm font-bold">Subscribe</button>
+                    </div>
+                    <div class="flex space-x-5 items-center">
+                        <p>Join us on</p>
+                        <ul class="flex space-x-2 text-white ">
+                            <li class="py-2 px-3 border-2 border-white"><a href="" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li class="py-2 px-3 border-2 border-white"><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li class="py-2 px-3 border-2 border-white"><a href="" target="_blank"><i class="fa-brands fa-google"></i></a></li>
+                            <li class="py-2 px-3 border-2 border-white"><a href="" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <hr>
+            <p class="flex justify-center  pt-4">©2024. WORLD MISSION HIGH SCHOOL. All rights reserved.</p>
+
+       
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
+
+{% comment %} School_admin page {% endcomment %}
+{% extends 'main/base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WMHS | School Administration</title>
+        <script src="{% static 'js/sliceText.js' %}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% tailwind_css %}
+    </head>
+    
+    <body class="">
+        <div class="bg-gray-200">
+            <div class="grid grid-cols-4 gap-4 mx-14">
+                <h1 class="col-span-4 font-bold mt-10 bg-primary text-secondary pt-2 pb-2 rounded-md text-2xl text-center">ADMINISTRATORS</h1>
+                <h1 class="font-bold text-lg col-span-4 mt-10">STAFF</h1>
+                {% for administrator in administrators %}
+                    <section class="bg-white w-[300px] bg-white  border border-gray-200 rounded-lg shadow-md">
+                        <div class="mb-4"><img src="{{ administrator.image_url }}" alt="Administrator image" class="w-full h-auto rounded-tl rounded-tr"></div>
+                        <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Name: </p><p>{{ administrator.name }}</p></div>
+                        <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Position: </p><p>{{ administrator.position }}</p></div>
+                        <div class="flex items-center pl-4 pb-4"><p class="font-semibold mr-2">Contact: </p><p>{{ administrator.contact }}</p></div>
+                    </section>
+                {% endfor %}
+            </div>
+            
+            <div class="grid grid-cols-4 gap-4 mx-14">
+                <h1 class="col-span-4 font-bold bg-primary text-secondary pt-2 pb-2 rounded-md mt-10 text-center text-2xl">TEACHERS</h1>
+                {% for field, teachers in teachers.items %}
+                    <h1 class="font-bold text-lg col-span-4 mt-10">{{ field }}</h1>
+                    {% for teacher in teachers %}
+                        <section class="bg-white w-[300px] bg-white  border border-gray-200 rounded-lg shadow-md">
+                            <div class="mb-4"><img src="{{ teacher.image_url }}" alt="Teacher Image" class="w-full h-auto rounded-tl rounded-tr mb-4">
+                            <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Name: </p><p>{{ teacher.name }}</p></div>
+                            <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2" id="text-container">Subjects: </p><p>{{ teacher.subjects|join:", " }}</p></div>
+                            <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Class: </p><p>{{ teacher.class }}</p></div>
+                            <div class="mb-2 flex items-center pl-4 pb-4"><p class="font-semibold mr-2">Contact: </p><p>{{ teacher.contact }}</p></div>                            
+                        </section>
+                    {% endfor %}
+                {% endfor %}
+                <div class="mb-20"></div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var textContainer = document.getElementById('text-container');
+                var maxLength = 8; // Set the maximum length of characters
+        
+                var text = textContainer.textContent.trim();
+                if (text.length > maxLength) {
+                    // If the text length exceeds the maximum length, truncate the text and add an ellipsis
+                    var truncatedText = text.slice(0, maxLength) + '...';
+                    textContainer.textContent = truncatedText;
+                }
+            });
+        </script>
+    </body>
+    </html>
+{% endblock content %}

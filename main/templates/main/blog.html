@@ -1,0 +1,40 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% for category, blogs in categorized_blogs.items %}
+    <h1 class="uppercase font-poppins p-6 font-bold text-2xl mb-6 text-gray-800 dark:text-white">{{ category }}</h1>
+    <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {% for blog in blogs %}
+            <div class="max-w-full bg-white h-[22rem] dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                <a href="/blog/{{ blog.id }}" class="block h-40">
+                    {% if blog.attachent %}
+                        {% with blog.attachent.url as attachment_url %}
+                            {% if attachment_url|slice:'-4:' == '.jpg' or attachment_url|slice:'-5:' == '.jpeg' or attachment_url|slice:'-4:' == '.png' or attachment_url|slice:'-4:' == '.gif' %}
+                                <img class="object-cover w-full h-full" src="{{ attachment_url }}" alt="Image">
+                            {% elif attachment_url|slice:'-4:' == '.mp4' or attachment_url|slice:'-4:' == '.avi' or attachment_url|slice:'-4:' == '.mov' %}
+                                <video id="myVideo" controls class="w-full h-full object-cover">
+                                    <source src="media/{{ attachment_url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            {% elif attachment_url|slice:'-4:' == '.pdf' %}
+                                <div class="pdf-container flex justify-center items-center h-full bg-gray-200 dark:bg-gray-600">
+                                    <a href="media/{{ attachment_url }}" target="_blank" class="text-blue-600 dark:text-blue-400">View PDF</a>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    {% endif %}
+                </a>
+                <div class="p-4">
+                    <a href="/blog/{{ blog.id }}" class="block mb-2">
+                        <h5 class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">{{ blog.title }}</h5>
+                    </a>
+                    <p class="mb-3 text-gray-700 dark:text-gray-400 line-clamp-2">{{ blog.content }}</p>
+                    <a href="/blog/{{ blog.id }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-700 dark:hover:bg-blue-800 dark:focus:ring-blue-900">
+                        Read more
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+{% endblock %}

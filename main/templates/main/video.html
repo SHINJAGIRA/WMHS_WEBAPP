@@ -1,0 +1,35 @@
+{% extends "./base.html" %}
+{% block content %}
+    <h1 class="text-3xl font-bold text-center my-8">WMHS Video Gallery</h1>
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for video in videos %}
+            <div class="video-item h-72 bg-white rounded-lg shadow-md transition-transform duration-300 hover:translate-y-[-5px] hover:shadow-lg">
+                <div class="relative pt-[56.25%] bg-cover bg-center rounded-t-lg" style="background-image: url({{video.poster.url}});">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="bg-white bg-opacity-80 rounded-full w-14 h-14 flex items-center justify-center transition-colors duration-300 hover:bg-opacity-100">
+                            <i class="fas fa-play fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold mb-2">{{ video.title }}</h3>
+                    <p class="text-gray-600 text-sm">{{ video.description }}</p>
+                </div>
+                <div class="hidden">
+                    <video id="video{{ forloop.counter }}" class="w-full h-auto" playsinline controls>
+                        <source src="{{ video.video_file.url }}" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-4 max-w-3xl w-full h-96 mx-4">
+            <div id="modalVideoContainer" class="w-full h-full"></div>
+            <button id="closeModal" class="mt-4 bg-primary text-white px-4 py-2 rounded transition-colors">Close</button>
+        </div>
+    </div>
+{% endblock %}

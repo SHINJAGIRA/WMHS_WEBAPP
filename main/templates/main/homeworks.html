@@ -1,0 +1,93 @@
+{% extends './base.html' %}
+
+{% block content %}
+<div class="container mx-auto  px-4">
+    <h1 class="uppercase font-semibold text-center text-2xl dark:text-white mb-8">Homeworks</h1>
+    <form id="filter-form" class="flex justify-end">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="button" id="filter-button" class="bg-primary text-white py-2 px-4 rounded hover:bg-blue-600">
+            Filter
+        </button>
+    </form>
+    <div id="homework-results" class="mt-6">
+        {% for trade, homework in homeworks.items %}
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">{{ trade }}</h2>
+            <div class="space-y-4">
+                {% for hw in homework %}
+                <div class="dark:bg-gray-800 dark:text-white flex justify-between items-center p-4 border-b border-gray-900">
+                    <div class="flex-1">
+                        <h3 class="font-semibold">{{ hw.title }}</h3>
+                        <span class="text-gray-400 text-sm">
+                            {% for level in hw.module.level.all %}{{ level }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-4 text-primary">
+                        <a href="{% url 'download_homework' year=hw.created_at|date:'Y' month=hw.created_at|date:'m' day=hw.created_at|date:'d' title=hw.title %}" class="hover:text-blue-400">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                        <a href="{% url 'homework_details' id=hw.id %}" class="hover:text-blue-400">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#filter-button').click(function() {
+            $.ajax({
+                url: "{% url 'homework' %}",
+                method: "POST",
+                dataType: 'json',
+                data: $('#filter-form').serialize(),
+                success: function(data) {
+                    var resultsContainer = $('#homework-results');
+                    resultsContainer.empty();
+
+                    if (Object.keys(data.results).length > 0) {
+                        $.each(data.results, function(trade, homeworks) {
+                            var tradeHeader = `
+                                <div class="mb-8">
+                                    <h2 class="text-2xl font-bold text-white mb-4">${trade}</h2>
+                                    <div class="space-y-4">
+                            `;
+                            resultsContainer.append(tradeHeader);
+
+                            $.each(homeworks, function(index, homework) {
+                                var homeworkHtml = `
+                                    <div class="dark:bg-gray-800 flex justify-between mb-4 dark:text-white  items-center p-4 border-b border-gray-900">
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold">${homework.title}</h3>
+                                            <span class="text-gray-400 text-sm">${homework.levels}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4 text-primary">
+                                            <a href="${homework.download_url}" class="hover:text-blue-400">
+                                                <i class="fa-solid fa-download"></i>
+                                            </a>
+                                            <a href="${homework.details_url}" class="hover:text-blue-400">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                `;
+                                resultsContainer.append(homeworkHtml);
+                            });
+
+                            resultsContainer.append('</div></div>');
+                        });
+                    } else {
+                        resultsContainer.append('<p class="text-center text-gray-500">No results found</p>');
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

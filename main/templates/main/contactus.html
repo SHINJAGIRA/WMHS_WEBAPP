@@ -1,0 +1,28 @@
+{% extends './base.html' %}
+{% block title%}WMHS|contact us{%endblock%}
+{% block content%}
+    <div class="my-5 md:mx-20 mx-5 ">
+        <h3 class="text-2xl dark:text-white mb-7">CONTACT US</h3>
+        <div class="md:flex bg-white dark:bg-gray-800 rounded-md min-h-fit flex-col-reverse md:flex-row">
+            <div class="md:w-1/2 w-full h-full order-1 md:order-2">
+                <img src="https://worldmissionhighschool.org/assets/img/Nlogo.png" class='w-full h-full object-cover' alt="">
+            </div>
+            <div class="p-7 md:w-1/2 w-full order-2 md:order-1">
+                <h3 class="text-xl dark:text-white">TALK WITH US</h3>
+                <form method="post" class="font-mono">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <input type="text" name="name" placeholder="enter your name" class="{{ form.name.field.widget.attrs.class }}"
+                        value="{{ form.name.value|default_if_none:'' }}" required><br>
+                    <input type="email" name="email" placeholder="enter your email" class="{{ form.email.field.widget.attrs.class }}"
+                        value="{{ form.email.value|default_if_none:'' }}" required><br>
+                    <input type="text" name="subject" placeholder="enter your Subject"
+                        class="{{ form.subject.field.widget.attrs.class }}" required value="{{ form.subject.value|default_if_none:'' }}"><br>
+                    <textarea name="description" placeholder="enter the message or the body" class="{{ form.description.field.widget.attrs.class }}"
+                        rows="4" required>{{ form.description.value|default_if_none:'' }}</textarea><br>
+                    <input type="submit" class='bg-primary w-full rounded-md py-2.5 text-white dark:bg-secondary'>
+                </form>
+            </div>
+        </div>
+    </div>
+{%endblock%}

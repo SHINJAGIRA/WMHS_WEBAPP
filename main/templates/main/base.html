@@ -1,0 +1,538 @@
+{% load static %}
+
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}Home{%endblock%}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.css">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    {% tailwind_css %}
+</head>
+
+<body class="font-poppins">
+    <div class="bg-white dark:bg-gray-900 h-auto">
+        <div class="">
+        <nav class=" dark:text-white font-poppins font-light">
+            <div class="md:flex md:items-center md:justify-between py-4 md:mx-14   mx-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-3xl text-secondary dark:text-white tracking-wider ">
+                        <a href="{% url 'index' %}">WMHS</a>
+                    </div>
+                    <div class="cursor-pointer md:hidden" id="menu" tabindex="0">
+                        <i class="fa-solid fa-bars fa-xl" style="color: rgb(112 112 112)"></i>
+                    </div>
+                </div>
+
+                <div class="block md:hidden ">
+                    <ul class="mr-10 hidden capitalize relative " id="menudropdown">
+                        <li
+                            class="px-3 py-2 focus:bg-primary hover:text-white hover:bg-primary focus:text-white rounded-sm transition-all">
+                            <a href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="px-3 py-2 focus:bg-primary hover:bg-primary hover:text-white focus:text-white rounded-sm transition-all relative cursor-pointer"
+                            id="smdropdownTrigger" tabindex="0">
+                            Academics
+                        </li>
+                        <div class="mt-2 z-20 text-black dark:text-white transition ease-in-out delay-150 "
+                            id="smdropdown">
+                            <ul
+                                class='mt-2 bg-white dark:bg-gray-700 dark:text-gray-100 w-full hover:text-black dark:hover:text-white rounded-md'>
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'tvet' %}"
+                                        class="block px-5 py-1 w-full h-full">Tvet Program</a></li>
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'homework' %}"
+                                        class="block px-5 py-1 w-full h-full">homeworks</a></li>
+                                <li class='hover:bg-primary hover:text-white'><a href=""
+                                        class="block px-5 py-1 w-full h-full">Results</a></li>
+                                <li class='hover:bg-primary hover:text-white'><a href=""
+                                        class="block px-5 py-1 w-full h-full">Timetables</a></li>
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'past_papers' %}"
+                                        class="block px-5 py-1 w-full h-full">Past papers</a></li>
+                            </ul>
+                        </div>
+                        <li class="px-3 py-2 focus:bg-primary hover:bg-primary hover:text-white focus:text-white rounded-sm transition-all relative cursor-pointer"
+                            id="smdropdownTrigger2" tabindex="0">
+                            About
+                        </li>
+                        <div class="mt-2 z-20 text-black dark:text-white transition ease-in-out delay-150 hidden"
+                            id='smdropdown2'>
+                            <ul
+                                class='mt-2 bg-white dark:bg-gray-700 dark:text-gray-100 w-full hover:text-black dark:hover:text-white rounded-md'>
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'history' %}"
+                                        class="block px-5 py-1 w-full h-full">Our history</a></li>
+                                <li class='hover:bg-primary hover:text-white'>
+                                    <a href="{% url 'staff_administration' %}"
+                                        class="block px-5 py-1 w-full h-full">school administration</a>
+                                </li>
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'homework' %}"
+                                        class="block px-5 py-1 w-full h-full">Partnership</a></li>
+                            </ul>
+                        </div>
+                        <li class=" hover:bg-primary hover:text-white rounded-sm transition-all"><a
+                                href="{% url 'blog'%}" class="px-3 py-2 block">Blog</a></li>
+                        <li class=" hover:bg-primary hover:text-white rounded-sm transition-all"><a
+                                href="{% url 'contact'%}" class="px-3 py-2 block">Contact us</a></li>
+                        <li id="smdropdownTrigger3" tabindex="0"
+                            class="px-3 py-2 focus:bg-primary hover:bg-primary hover:text-white focus:text-white rounded-sm transition-all relative cursor-pointer">
+                            Gallery
+                        </li>
+                        <div class="hidden z-20 text-black dark:text-white transition-all" id='smdropdown3'>
+                            <ul
+                                class="mt-2 bg-white dark:bg-gray-700 dark:text-gray-100 w-full hover:text-black dark:hover:text-white rounded-md">
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'history' %}"
+                                        class="block px-5 py-1 w-full h-full">Images</a></li>
+                                <li class='hover:bg-primary hover:text-white'><a href="{% url 'history' %}"
+                                        class="block px-5 py-1 w-full h-full">Videos</a></li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+
+                <div class="hidden md:block">
+                    <ul
+                        class="md:flex md:items-center block  md:space-x-4  lg:space-x-8 capitalize relative leading-wider">
+                        <li class=" focus:bg-primary hover:text-white hover:bg-primary rounded-sm transition-all">
+                            <a href="{% url 'index' %}" class="px-3 py-2 block">Home</a>
+                        </li>
+                        <li class="px-3 py-2 md:focus:bg-primary hover:bg-primary hover:text-white focus:text-white rounded-sm transition-all relative cursor-pointer"
+                            id="dropdownTrigger" tabindex="0">
+                            Academics
+                            <div class="absolute top-[3.25rem] z-20 hidden text-black dark:text-white transition-all"
+                                id='dropdown'>
+                                <ul
+                                    class='bg-white dark:bg-gray-900 dark:text-white w-[18rem] hover:text-black dark:hover:text-white'>
+                                    <li class=' hover:bg-primary hover:text-white border-b border-secondary'><a
+                                            href="{% url 'tvet' %}" class="px-5 py-2 block">Tvet Plan</a></li>
+                                    <li class=' hover:bg-primary hover:text-white border-b border-secondary'><a
+                                            href="{% url 'homework' %}" class="px-5 py-2 block ">Homework</a></li>
+                                    <li class=' hover:bg-primary hover:text-white border-b border-secondary'><a
+                                            class="px-5 py-2 block">Result</a></li>
+                                    <li class=' hover:bg-primary hover:text-white border-b border-secondary'><a
+                                            class="px-5 py-2 block">Time Table</a></li>
+                                    <li class=' hover:bg-primary hover:text-white '><a href="{% url 'past_papers' %}"
+                                            class="px-5 py-2 block">Past Paper</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="px-3 py-2 focus:bg-primary hover:bg-primary hover:text-white focus:text-white rounded-sm transition-all relative cursor-pointer"
+                            id="dropdownTrigger2" tabindex="0">
+                            About
+                            <div class="absolute top-[3.25rem] z-20 hidden text-black dark:text-white transition-all"
+                                id='dropdown2'>
+                                <ul
+                                    class='bg-white dark:bg-gray-900 dark:text-white w-[18rem] hover:text-black dark:hover:text-white'>
+                                    <li class=' hover:bg-primary hover:text-white border-b border-secondary'><a
+                                            class="px-5 py-2 block" href="{% url 'history'%}">Our history</a></li>
+
+                                    <li class='hover:bg-primary hover:text-white border-b border-secondary'><a
+                                            href="{% url 'staff_administration' %}" class="block px-5 py-2 ">Staff
+                                            administration</a></li>
+
+                                    <li class='px-5 py-2 hover:bg-primary hover:text-white'>Partnership</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class=" hover:bg-primary hover:text-white rounded-sm transition-all"><a href="/blog"
+                                class="px-3 py-2 block">Blog</a></li>
+                        <li class=" focus:bg-primary hover:text-white hover:bg-primary rounded-sm transition-all">
+                            <a href="{% url 'contact' %}" class="px-3 py-2 block">Contact us</a>
+                        </li>
+                        <li id="dropdownTrigger3" tabindex="0"
+                            class="px-3 py-2 focus:bg-primary hover:bg-primary hover:text-white focus:text-white rounded-sm transition-all relative cursor-pointer">
+                            Gallery
+                            <div class="absolute top-[3.25rem] left-[-1rem] z-20 hidden text-black dark:text-white transition-all"
+                                id='dropdown3'>
+                                <ul
+                                    class="bg-white dark:bg-gray-900 dark:text-white w-[8rem] hover:text-black dark:hover:text-white">
+                                    <li class='px-5 py-2 hover:bg-primary hover:text-white border-b border-secondary'>
+                                        Images
+                                    </li>
+                                    <li class='px-5 py-2 hover:bg-primary hover:text-white'>Videos</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="hidden md:block">
+                    <ul class="md:flex md:items-center block  md:space-x-4  lg:space-x-10 capitalize relative">
+                        <li
+                            class=" focus:bg-primary hover:text-white bg-primary text-white cursor-pointer rounded-sm transition-all">
+                            <a href="{% url 'index' %}" class="px-3 py-2 block">Register</a>
+                        </li>
+
+                </div>
+
+
+            </div>
+
+        </nav>
+
+    </div>
+            {% block content %}
+            {% endblock content %}
+        
+        <div class="footer bg-white dark:bg-gray-900 dark:text-white md:px-24 px-3 py-5 text-secondary  text-sm">
+            <div class="text-3xl  font-light tracking-wider" style="font-family: Impact;">WMHS</div>
+            <div class="flex flex-col md:flex-row justify-between mt-10 mb-20">
+                <div class="flex space-x-10">
+                    <ul class="space-y-1">
+                        <h3 class=" mb-4 font-bold uppercase">Our Services</h3>
+                        <li>
+                            <a href="">
+                                Apply as a student
+                            </a>
+                        </li>
+                        <li><a href="">Ask a question</a></li>
+                        <li><a href="">About us</a></li>
+                        <li><a href="">Contact us</a></li>
+                    </ul>
+                    <ul class="space-y-1">
+                        <h3 class=" mb-4 font-bold uppercase">Academics</h3>
+                        <li>
+                            <a href={%url 'homework' %}>
+                                Homeworks
+                            </a>
+                        </li>
+                        <li><a href="">Timetables</a></li>
+                        <li><a href="{%url 'tvet'%}">Tvet Plan</a></li>
+                        <li><a href="">Chapel plan</a></li>
+                        <li><a href="">Results</a></li>
+                    </ul>
+                    <ul class="space-y-1">
+                        <h3 class="font-bold mb-4  uppercase">Other links</h3>
+                        <li>
+                            <a href="">
+                                Blog
+                            </a>
+                        </li>
+                        <li><a href="">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <p class="text-lg font-semibold">Subscribe to our email:</p>
+                    <form id="subscribe-form" method="post">
+                        <div class="flex space-x-1 my-3">
+                            {% csrf_token %}
+                            <input type="text" name="email"
+                                class=" rounded-sm  bg-gray-200 text-gray-900 border-none h-10 outline-none w-60 placeholder-opacity-50 italic text-sm"
+                                placeholder="Enter your email..." required>
+                            <button name='submit'
+                                class="bg-primary text-white  px-2 md:px-4 h-10 rounded-sm font-bold">Subscribe</button>
+                        </div>
+                    </form>
+                    <div id="subscribe-message">
+                        {% for msg in messages%}
+                        {{msg}}
+                        {%endfor%}
+                    </div>
+
+                    <div class="flex space-x-5 items-center">
+                        <p>Join us on</p>
+                        <ul class="flex space-x-2  ">
+                            <li class="py-2 px-3 border-2 border-gray-600  cursor-pointer"><a href="" target="_blank"><i
+                                        class="fa-brands fa-facebook-f"></i></a></li>
+                            <li class="py-2 px-3 border-2 border-gray-600 cursor-pointer"><a href="" target="_blank"><i
+                                        class="fa-brands fa-instagram"></i></a></li>
+                            <li class="py-2 px-3 border-2 border-gray-600 cursor-pointer"><a href="" target="_blank"><i
+                                        class="fa-brands fa-google"></i></a></li>
+                            <li class="py-2 px-3 border-2 border-gray-600 cursor-pointer"><a href="" target="_blank"><i
+                                        class="fa-brands fa-linkedin-in"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <hr>
+            <p class="flex justify-center  pt-4">©2024. WORLD MISSION HIGH SCHOOL. All rights reserved.</p>
+        </div>
+        <script src="{% static 'js/dropdown.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.js"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script>
+            let dropdownEl4 = document.querySelector('#smdropdown');
+            let smtrigger = document.querySelector('#smdropdownTrigger');
+            let dropdownEl5 = document.querySelector('#smdropdown2');
+            let smtrigger2 = document.querySelector('#smdropdownTrigger2');
+            let dropdownEl6 = document.querySelector('#smdropdown3');
+            let smtrigger3 = document.querySelector('#smdropdownTrigger3');
+            let menu = document.querySelector('#menu')
+            let menudropdown = document.querySelector('#menudropdown')
+            const progressCircle = document.querySelector(".autoplay-progress svg");
+            const progressContent = document.querySelector(".autoplay-progress span");
+
+            smtrigger.addEventListener('click', () => {
+                dropdownEl4.classList.toggle('hidden')
+                console.log('clicked');
+            });
+            smtrigger2.addEventListener('click', () => {
+                dropdownEl5.classList.toggle('hidden');
+            });
+            smtrigger3.addEventListener('click', () => {
+                dropdownEl6.classList.toggle('hidden');
+            });
+            document.body.addEventListener('click', (e) => {
+                if (!dropdownEl4.contains(e.target) && !smtrigger.contains(e.target)) {
+                    dropdownEl4.classList.add('hidden');
+                    smtrigger.removeAttribute('tabindex');
+                }
+            });
+            document.body.addEventListener('click', (e) => {
+                if (!dropdownEl5.contains(e.target) && !smtrigger2.contains(e.target)) {
+                    dropdownEl5.classList.add('hidden');
+                    smtrigger2.removeAttribute('tabindex');
+                }
+            });
+            document.body.addEventListener('click', (e) => {
+                if (!dropdownEl6.contains(e.target) && !smtrigger3.contains(e.target)) {
+                    dropdownEl6.classList.add('hidden');
+                    smtrigger3.removeAttribute('tabindex');
+                }
+            });
+            menu.addEventListener('click', () => {
+                menudropdown.classList.toggle('hidden');
+            })
+            document.body.addEventListener('click', (e) => {
+                if (!menudropdown.contains(e.target) && !menu.contains(e.target)) {
+                    menudropdown.classList.add('hidden');
+                    menu.removeAttribute('tabindex');
+                }
+            });
+
+            const mySwiper = new Swiper('.swiper', {
+                slidesPerView: 1,
+                direction: 'horizontal',
+                loop: true,
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+
+
+                on: {
+                    autoplayTimeLeft(s, time, progress) {
+                        progressCircle.style.setProperty("--progress", 1 - progress);
+                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                    }
+                }
+
+            })
+            const myevents = new Swiper('.events', {
+                slidesPerView: 1,
+                direction: 'horizontal',
+                loop: true,
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 40,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                    },
+                },
+
+            })
+            const activities = new Swiper('.activities', {
+                slidesPerView: 1,
+                direction: 'horizontal',
+                loop: true,
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 40,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                    },
+                },
+
+            })
+            let dropdownEl = document.querySelector('#dropdown');
+            let dropdownTrigger = document.querySelector('#dropdownTrigger');
+            let dropdownEl2 = document.querySelector('#dropdown2');
+            let dropdownTrigger2 = document.querySelector('#dropdownTrigger2');
+            let dropdownEl3 = document.querySelector('#dropdown3');
+            let dropdownTrigger3 = document.querySelector('#dropdownTrigger3');
+
+
+            function toggleDropdownAcademics() {
+                dropdownEl.classList.toggle('hidden');
+                if (!dropdownEl.classList.contains('hidden')) {
+                    dropdownTrigger.setAttribute('tabindex', '0');
+                    dropdownTrigger.focus();
+                } else {
+                    dropdownTrigger.removeAttribute('tabindex');
+                }
+            }
+
+            document.body.addEventListener('click', (e) => {
+                if (!dropdownEl.contains(e.target) && !dropdownTrigger.contains(e.target)) {
+                    dropdownEl.classList.add('hidden');
+                    dropdownTrigger.removeAttribute('tabindex');
+                }
+            });
+
+            dropdownTrigger.addEventListener('click', () => {
+                toggleDropdownAcademics();
+            });
+
+
+            function toggleDropdownAbout() {
+                dropdownEl2.classList.toggle('hidden');
+                if (!dropdownEl2.classList.contains('hidden')) {
+                    dropdownTrigger2.setAttribute('tabindex', '0');
+                    dropdownTrigger2.focus();
+                } else {
+                    dropdownTrigger2.removeAttribute('tabindex');
+                }
+            }
+
+            document.body.addEventListener('click', (e) => {
+                if (!dropdownEl2.contains(e.target) && !dropdownTrigger2.contains(e.target)) {
+                    dropdownEl2.classList.add('hidden');
+                    dropdownTrigger2.removeAttribute('tabindex');
+                }
+            });
+
+            dropdownTrigger2.addEventListener('click', () => {
+                toggleDropdownAbout();
+            });
+
+            function toggleDropdownGallery() {
+                dropdownEl3.classList.toggle('hidden');
+                if (!dropdownEl3.classList.contains('hidden')) {
+                    dropdownTrigger3.setAttribute('tabindex', '0');
+                    dropdownTrigger3.focus();
+                } else {
+                    dropdownTrigger3.removeAttribute('tabindex');
+                }
+            }
+
+            document.body.addEventListener('click', (e) => {
+                if (!dropdownEl3.contains(e.target) && !dropdownTrigger3.contains(e.target)) {
+                    dropdownEl3.classList.add('hidden');
+                    dropdownTrigger3.removeAttribute('tabindex');
+                }
+            });
+
+            dropdownTrigger3.addEventListener('click', () => {
+                toggleDropdownGallery();
+            });
+            $(document).ready(function () {
+                $('#subscribe-form').on('submit', function (e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: "{% url 'subscribe' %}",
+                        data: $(this).serialize(),
+                        method: "POST",
+                        success: function (response) {
+                            $('#subscribe-message').text(response.message);
+
+                            if (response.status === 'success') {
+                                $('#subscribe-message')
+                                    .removeClass('text-red-500')
+                                    .addClass('text-green-500');
+                                $('#subscribe-form')[0].reset();
+                            } else if (response.status === 'info') {
+                                $('#subscribe-message')
+                                    .removeClass('text-green-500')
+                                    .addClass('text-yellow-500');
+                            } else {
+                                $('#subscribe-message')
+                                    .removeClass('text-green-500')
+                                    .addClass('text-red-500');
+                            }
+                        },
+                        error: function (xhr, errmsg, err) {
+                            $('#subscribe-message').text('An error occurred: ' + errmsg)
+                                .removeClass('text-green-500')
+                                .addClass('text-red-500');
+                        }
+                    });
+                });
+            });
+            
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('videoModal');
+            const modalVideoContainer = document.getElementById('modalVideoContainer');
+            const closeModal = document.getElementById('closeModal');
+            let currentPlayer = null;
+
+            document.querySelectorAll('[data-play-video]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-play-video');
+                    const videoElement = document.getElementById(videoId).cloneNode(true);
+                    modalVideoContainer.innerHTML = '';
+                    modalVideoContainer.appendChild(videoElement);
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    currentPlayer = new Plyr(videoElement);
+                    currentPlayer.play();
+                });
+            });
+
+            closeModal.addEventListener('click', function() {
+                if (currentPlayer) {
+                    currentPlayer.destroy();
+                }
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+        });
+    
+        </script>
+
+
+
+
+</body>
+
+</html>

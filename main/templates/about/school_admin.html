@@ -1,0 +1,87 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+{% block title %}School Administration{% endblock title %}
+
+{% tailwind_css %}
+{% block content %}
+    <div class="mx-5">
+        <h1 class="col-span-4 font-bold  bg-primary text-white pt-2 pb-2 rounded-sm text-md text-center xl:font-extrabold xl:text-lg xl:rounded-sm md:font-bold">ADMINISTRATORS</h1>
+        <h1 class="text-md font-bold col-span-4 mt-10 mb-2">STAFF</h1>
+        <div class="grid gap-4 lg:grid-cols-3 lg:mx-6 md:grid-cols-2 md:mx-5 xl:grid-cols-4 xl:mx-5 mb-10">
+            {% for staff in staffs %}
+            <section class="relative bg-white  w-full rounded-lg shadow-md mx-auto">
+                <div class="mx-auto w-full dark:bg-gray-800 dark:text-white">
+                    <div class="relative h-60 mb-4 w-full  rounded-t-lg transition duration-300 ease-in-out trigger-element">
+                        <div class="absolute  bg-primary w-full rounded-t-lg hidden hover-content transition-all duration-300 ease-in-out">
+                            <ul class="flex justify-center space-x-2 text-white mx-12 my-[6.12rem]">
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ staff.facebook }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ staff.instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ staff.facebook }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ staff.instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <img src="{{ staff.profile_pic.url }}" alt="Administrator image" class="object-cover w-full h-full rounded-t-lg hover:bg-primary">
+                    </div>
+                    <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Name: </p><p>{{ staff.first_name }} {{ staff.last_name }}</p></div>
+                    <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Position: </p><p>{{ staff.position }}</p></div>
+                    <div class="flex items-center pl-4 pb-4"><p class="font-semibold mr-2">Contact: </p><p>{{ staff.phone_number }}</p></div>
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mx-5">
+        <h1 class="col-span-4 font-bold bg-primary text-white pt-2 pb-2 rounded-sm  text-md text-center mt-10 xl:font-extrabold xl:text-lg xl:rounded-sm md:font-bold">TEACHERS</h1>
+        <h1 class="text-md font-bold col-span-4 mt-10 ml-6 mb-2">STAFF</h1>
+        <div class="grid gap-4 lg:grid-cols-3 lg:mx-6 md:grid-cols-2 md:mx-5 xl:grid-cols-4 xl:mx-5">
+            {% for teacher in teachers %}
+            <section class="relative bg-white w-full rounded-lg shadow-md mx-auto">
+                <div class="mx-auto w-full dark:bg-gray-800 dark:text-white">
+                    <div class="relative h-60 mb-4 w-full  rounded-t-lg transition duration-300 ease-in-out trigger-element">
+                        <div class="absolute bg-primary w-full rounded-t-lg hidden hover-content transition-all duration-300 ease-in-out">
+                            <ul class="flex justify-center space-x-2 text-white mx-12 my-[6.12rem]">
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ teacher.facebook }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ teacher.instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ teacher.facebook }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li class="py-2 px-4 border-2 border-white"><a href="{{ teacher.instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <img src="{{ teacher.profile_pic.url }}" alt="Teacher image" class="object-cover w-full h-full rounded-t-lg">
+                    </div>
+                    <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Name: </p><p>{{ teacher.first_name }} {{ teacher.last_name }}</p></div>
+                    <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Department: </p><p></p></div>
+                    <div class="mb-2 flex items-center pl-4"><p class="font-semibold mr-2">Class:{{ teacher.class_teacher}} </p><p></p></div>
+                    <div class="flex items-center pl-4 pb-4"><p class="font-semibold mr-2">Contact: </p><p>{{ teacher.phone_number }}</p></div>
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select all trigger elements and hover content elements
+        const triggerElements = document.querySelectorAll('.trigger-element');
+        const hoverContents = document.querySelectorAll('.hover-content');
+
+        triggerElements.forEach((triggerElement, index) => {
+            const hoverContent = hoverContents[index];
+            
+            // Add event listener for mouse enter
+            triggerElement.addEventListener('mouseenter', () => {
+                hoverContent.classList.remove('hidden');
+                hoverContent.classList.add('block');
+            });
+
+            // Add event listener for mouse leave
+            triggerElement.addEventListener('mouseleave', () => {
+                hoverContent.classList.add('hidden');
+                hoverContent.classList.remove('block');
+            });
+        });
+    });
+</script>
+{% endblock content %}

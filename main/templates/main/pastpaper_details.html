@@ -1,0 +1,40 @@
+{% extends './base.html' %}
+{%block title%}{{pastpaper.title}} | Paper{%endblock%}
+{% block content %}
+        <div class="flex order-1 flex-col lg:flex-row h-auto min-w-screen text-slate-500 p-8">
+        <div class="lg:w-3/5 order-2 lg:order-1 w-full shadow-sm mt-8 lg:mr-8 lg:p-8 lg:ml-8">
+            <div class="flex justify-between mb-4">
+                <h1 class="text-2xl text-primary font-bold">{{ pastpaper.trade.description }}</h1>
+                <p class="text-sm font-semibold">{{ pastpaper.created_at|date }}</p>
+            </div>
+            <h2 class="text-3xl font-bold mb-4">{{ pastpaper.title }}</h2>
+            <p class="text-base select-none leading-relaxed mb-4">{{ pastpaper.description }}</p>
+            <p class="text-lg text-primary font-bold underline mb-2">Classes</p>
+            <ul class="text-sm">
+                {%for level in pastpaper.module.level.all%}
+                <li>{{level}}</li>
+                 {%endfor%}
+            </ul>
+            <div class="mt-4">
+                    <a href="{% url 'download_pastpaper' year=pastpaper.created_at|date:'Y' month=pastpaper.created_at|date:'m' day=pastpaper.created_at|date:'d' title=pastpaper.title %}">
+                            <button class="w-full py-2 bg-primary text-white font-semibold rounded-md focus:ring-4 focus:ring-primary dark:focus:ring-primary">
+                                Download
+                            </button>
+                        </a>
+                    </div> 
+        </div>
+        <div class="lg:w-2/5 order-1 lg:order-2 w-full">
+            <div class="h-[24rem] lg:h-[30rem]">
+                {% if pastpaper.thumbnail %}
+                <img src="{{ pastpaper.thumbnail.url }}" alt="{{ pastpaper.title }}" class="rounded-lg shadow-md object-cover w-full h-full">
+                        
+                {% else %}
+                no Preview found
+                {%endif%}
+            </div>
+        </div>
+    </div>
+        
+    </div>
+</div>
+{% endblock %}

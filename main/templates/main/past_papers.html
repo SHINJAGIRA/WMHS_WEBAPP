@@ -1,0 +1,93 @@
+{% extends './base.html' %}
+
+{% block content %}
+<div class="container mx-auto  px-4">
+    <h1 class="uppercase font-semibold text-center text-2xl dark:text-white mb-8">PastPapers</h1>
+    <form id="filter-form" class="flex justify-end">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="button" id="filter-button" class="bg-primary text-white py-2 px-4 rounded hover:bg-blue-600">
+            Filter
+        </button>
+    </form>
+    <div id="pastpaper-results" class="mt-6">
+        {% for year, pastpaper in pastpaper.items %}
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">{{ trade }}</h2>
+            <div class="space-y-4">
+                {% for pastpaper in pastpaper %}
+                <div class="dark:bg-gray-800 dark:text-white flex justify-between items-center p-4 border-b border-gray-900">
+                    <div class="flex-1">
+                        <h3 class="font-semibold">{{ pastpaper.title }}</h3>
+                        <span class="text-gray-400 text-sm">
+                            {% for year in pastpaper.module.level.all %}{{ year }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                        </span>
+                    </div>
+                    <div class="flex items-center space-x-4 text-primary">
+                        <a href="{% url 'download_pastpaper' year=pastpaper.created_at|date:'Y' month=pastpaper.created_at|date:'m' day=pastpaper.created_at|date:'d' title=pastpaper.title %}" class="hover:text-blue-400">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                        <a href="{% url 'pastpaper_details' id=pastpaper.id %}" class="hover:text-blue-400">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#filter-button').click(function() {
+            $.ajax({
+                url: "{% url 'past_papers' %}",
+                method: "POST",
+                dataType: 'json',
+                data: $('#filter-form').serialize(),
+                success: function(data) {
+                    var resultsContainer = $('#pastpaper-results');
+                    resultsContainer.empty();
+
+                    if (Object.keys(data.results).length > 0) {
+                        $.each(data.results, function(year, pastpaper) {
+                            var tradeHeader = `
+                                <div class="mb-8">
+                                    <h2 class="text-2xl font-bold text-white mb-4">${year}</h2>
+                                    <div class="space-y-4">
+                            `;
+                            resultsContainer.append(tradeHeader);
+
+                            $.each(pastpaper, function(index, pastpaper) {
+                                var homeworkHtml = `
+                                    <div class="dark:bg-gray-800 flex justify-between mb-4 dark:text-white  items-center p-4 border-b border-gray-900">
+                                        <div class="flex-1">
+                                            <h3 class="font-semibold">${pastpaper.title}</h3>
+                                            <span class="text-gray-400 text-sm">${pastpaper.levels}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4 text-primary">
+                                            <a href="${pastpaper.download_url}" class="hover:text-blue-400">
+                                                <i class="fa-solid fa-download"></i>
+                                            </a>
+                                            <a href="${pastpaper.details_url}" class="hover:text-blue-400">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                `;
+                                resultsContainer.append(homeworkHtml);
+                            });
+
+                            resultsContainer.append('</div></div>');
+                        });
+                    } else {
+                        resultsContainer.append('<p class="text-center text-gray-500">No results found</p>');
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
