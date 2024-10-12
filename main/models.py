@@ -33,6 +33,7 @@ TRADE_CHOICES=(
     ('NIT','NIT'),
     ('MMP',"MMP")
     )
+
 CLASS_CHOICES = (
     ('Level 3 SOD A','Level 3 SOD A'),
     ('Level 3 SOD B','Level 3 SOD B'),
@@ -47,7 +48,7 @@ CLASS_CHOICES = (
     ('Level 5 SOD','Level 5 SOD'),
     ('Level 5 NIT','Leve 5 NIT'),
     ('Level 5 MM','Level 5 MM')
-)
+    )
 
 def yearchoice():
     current_year=datetime.date.today().year
